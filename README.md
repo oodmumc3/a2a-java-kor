@@ -2,17 +2,6 @@
 
 # A2A Java SDK
 
-[](https://www.google.com/search?q=LICENSE)
-
-\<html\>
-\<h2 align="center"\>
-\<img src="[https://raw.githubusercontent.com/google-a2a/A2A/refs/heads/main/docs/assets/a2a-logo-black.svg](https://raw.githubusercontent.com/google-a2a/A2A/refs/heads/main/docs/assets/a2a-logo-black.svg)" width="256" alt="A2A 로고"/\>
-\</h2\>
-\<h3 align="center"\>\<a href="[https://google-a2a.github.io/A2A](https://google-a2a.github.io/A2A)"\>Agent2Agent (A2A) 프로토콜\</a\>에 따라 에이전트 애플리케이션을 A2AServer로 실행하는 데 도움이 되는 자바 라이브러리입니다.\</h3\>
-\</html\>
-
------
-
 ## 설치
 
 `mvn`을 사용하여 A2A Java SDK를 빌드할 수 있습니다:
