@@ -1,15 +1,11 @@
 package io.a2a.examples.helloworld;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.a2a.client.A2AClient;
-import io.a2a.spec.A2A;
-import io.a2a.spec.AgentCard;
-import io.a2a.spec.Message;
-import io.a2a.spec.MessageSendParams;
-import io.a2a.spec.SendMessageResponse;
+import io.a2a.spec.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple example of using the A2A Java SDK to communicate with an A2A server.
@@ -50,11 +46,11 @@ public class HelloWorldClient {
                 .build();
             SendMessageResponse response = client.sendMessage(params);
             System.out.println("Message sent with ID: " + response.getId());
-            System.out.println("Response: " + response.toString());
+            System.out.println("Response: " + (response.getResult() instanceof Message));
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-} 
+}

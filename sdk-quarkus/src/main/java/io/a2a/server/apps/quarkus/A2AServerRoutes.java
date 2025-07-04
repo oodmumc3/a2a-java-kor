@@ -1,50 +1,14 @@
 package io.a2a.server.apps.quarkus;
 
-import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
-import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.Flow;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Function;
-
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
-import jakarta.ws.rs.core.Response;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.io.JsonEOFException;
 import io.a2a.server.ExtendedAgentCard;
 import io.a2a.server.requesthandlers.JSONRPCHandler;
-import io.a2a.spec.A2A;
-import io.a2a.spec.AgentCard;
-import io.a2a.spec.CancelTaskRequest;
-import io.a2a.spec.GetTaskPushNotificationConfigRequest;
-import io.a2a.spec.GetTaskRequest;
-import io.a2a.spec.IdJsonMappingException;
-import io.a2a.spec.InternalError;
-import io.a2a.spec.InvalidParamsError;
-import io.a2a.spec.InvalidParamsJsonMappingException;
-import io.a2a.spec.InvalidRequestError;
-import io.a2a.spec.JSONErrorResponse;
-import io.a2a.spec.JSONParseError;
-import io.a2a.spec.JSONRPCError;
-import io.a2a.spec.JSONRPCErrorResponse;
-import io.a2a.spec.JSONRPCRequest;
-import io.a2a.spec.JSONRPCResponse;
-import io.a2a.spec.MethodNotFoundError;
-import io.a2a.spec.MethodNotFoundJsonMappingException;
-import io.a2a.spec.NonStreamingJSONRPCRequest;
-import io.a2a.spec.SendMessageRequest;
-import io.a2a.spec.SendStreamingMessageRequest;
-import io.a2a.spec.SetTaskPushNotificationConfigRequest;
-import io.a2a.spec.StreamingJSONRPCRequest;
-import io.a2a.spec.TaskResubscriptionRequest;
-import io.a2a.spec.UnsupportedOperationError;
-import io.a2a.util.Utils;
 import io.a2a.server.util.async.Internal;
+import io.a2a.spec.*;
+import io.a2a.spec.InternalError;
+import io.a2a.util.Utils;
 import io.quarkus.vertx.web.Body;
 import io.quarkus.vertx.web.ReactiveRoutes;
 import io.quarkus.vertx.web.Route;
@@ -57,6 +21,18 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.RoutingContext;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import jakarta.ws.rs.core.Response;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Flow;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
+
+import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Singleton
 public class A2AServerRoutes {

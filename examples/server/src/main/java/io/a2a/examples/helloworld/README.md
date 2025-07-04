@@ -1,70 +1,73 @@
-# A2A Hello World Example
+# A2A Hello World 예시
 
-This example demonstrates how to use the A2A Java SDK to communicate with an A2A client. The example includes a Java server that receives both regular and streaming messages from a Python A2A client.
+이 예시는 A2A Java SDK를 사용하여 A2A 클라이언트와 통신하는 방법을 보여줍니다. 이 예시에는 Python A2A 클라이언트로부터 일반 메시지와 스트리밍 메시지를 모두 수신하는 자바 서버가 포함되어 있습니다.
 
-## Prerequisites
+## 전제 조건
 
-- Java 11 or higher
-- Python 3.8 or higher
+- Java 11 이상
+- Python 3.8 이상
 - [uv](https://github.com/astral-sh/uv)
 - Git
 
-## Run the Java A2A Server
+## Java A2A 서버 실행
 
-The Java server can be started using `mvn` as follows:
+자바 서버는 `mvn`을 사용하여 다음과 같이 시작할 수 있습니다.
 
 ```bash
 cd examples/server
 mvn quarkus:dev
 ```
 
-## Setup and Run the Python A2A Client
+## Python A2A 클라이언트 설정 및 실행
 
-The Python A2A client is part of the [a2a-samples](https://github.com/google-a2a/a2a-samples) project. To set it up and run it:
+Python A2A 클라이언트는 [a2a-samples](https://github.com/google-a2a/a2a-samples) 프로젝트의 일부입니다. 설정 및 실행 방법은 다음과 같습니다.
 
-1. Clone the a2a-samples repository:
-   ```bash
-   git clone https://github.com/google-a2a/a2a-samples.git
-   cd a2a-samples/samples/python/agents/helloworld
-   ```
+1.  a2a-samples 저장소 복제:
 
-2. **Recommended method**: Install dependencies using uv (much faster Python package installer):
-   ```bash
-   # Install uv if you don't have it already
-   # On macOS and Linux
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-   # On Windows
-   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+    ```bash
+    git clone https://github.com/google-a2a/a2a-samples.git
+    cd a2a-samples/samples/python/agents/helloworld
+    ```
 
-   # Install the package using uv
-   uv venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   uv pip install -e .
-   ```
+2.  **권장 방법**: uv를 사용하여 종속성 설치 (훨씬 빠른 Python 패키지 설치 프로그램):
 
-4. Run the client with uv (recommended):
-   ```bash
-   uv run test_client.py
-   ```
+    ```bash
+    # uv가 아직 설치되어 있지 않다면 설치합니다.
+    # macOS 및 Linux
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    # Windows
+    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-The client will connect to the Java server running on `http://localhost:9999`.
+    # uv를 사용하여 패키지 설치
+    uv venv
+    source .venv/bin/activate  # Windows: .venv\Scripts\activate
+    uv pip install -e .
+    ```
 
-## What the Example Does
+3.  uv를 사용하여 클라이언트 실행 (권장):
 
-The Python A2A client (`test_client.py`) performs the following actions:
+    ```bash
+    uv run test_client.py
+    ```
 
-1. Fetches the server's public agent card
-2. Fetches the server's extended agent card if supported by the server (see https://github.com/a2aproject/a2a-java/issues/81)
-3. Creates an A2A client using the extended agent card that connects to the Python server at `http://localhost:9999`.
-4. Sends a regular message asking "how much is 10 USD in INR?".
-5. Prints the server's response.
-6. Sends the same message as a streaming request.
-7. Prints each chunk of the server's streaming response as it arrives.
+클라이언트는 `http://localhost:9999`에서 실행 중인 자바 서버에 연결됩니다.
 
-## Notes
+## 예시의 작동 방식
 
-- Make sure the Java server is running before starting the Python client.
-- The client will wait for 10 seconds to collect streaming responses before exiting.
-- You can modify the server's response in `AgentExecutorProducer.java` if needed.
-- You can modify the server's agent card in `AgentCardProducer.java` if needed.
-- You can modify the server's URL in `application.properties` and `AgentCardProducer.java` if needed.
+Python A2A 클라이언트(`test_client.py`)는 다음 작업을 수행합니다.
+
+1.  서버의 공개 에이전트 카드(public agent card)를 가져옵니다.
+2.  서버에서 지원하는 경우 서버의 확장 에이전트 카드(extended agent card)를 가져옵니다 (참고: [https://github.com/a2aproject/a2a-java/issues/81](https://github.com/a2aproject/a2a-java/issues/81)).
+3.  `http://localhost:9999`에서 Python 서버에 연결하는 확장 에이전트 카드를 사용하여 A2A 클라이언트를 생성합니다.
+4.  "10 USD는 INR로 얼마입니까?"라는 일반 메시지를 보냅니다.
+5.  서버의 응답을 출력합니다.
+6.  동일한 메시지를 스트리밍 요청으로 보냅니다.
+7.  서버의 스트리밍 응답 각 청크가 도착할 때마다 출력합니다.
+
+## 참고 사항
+
+- Python 클라이언트를 시작하기 전에 자바 서버가 실행 중인지 확인하세요.
+- 클라이언트는 종료하기 전에 스트리밍 응답을 수집하기 위해 10초 동안 기다립니다.
+- 필요한 경우 `AgentExecutorProducer.java`에서 서버 응답을 수정할 수 있습니다.
+- 필요한 경우 `AgentCardProducer.java`에서 서버 에이전트 카드를 수정할 수 있습니다.
+- 필요한 경우 `application.properties` 및 `AgentCardProducer.java`에서 서버 URL을 수정할 수 있습니다.
